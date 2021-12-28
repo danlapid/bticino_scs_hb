@@ -1,15 +1,17 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
+  "pluginAlias": "BticinoSCSHomebridge",
   "pluginType": "platform",
   "singular": true,
   "schema": {
     "type": "object",
     "properties": {
-      "name": {
-        "title": "Name",
-        "type": "string",
-        "required": true,
-        "default": "Example Dynamic Platform"
+      "devices": {
+        "title": "Switches to connect",
+        "description": "The details of the home's switches, if A is 0 and PL is 1 write 01",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       }
     }
   }
