@@ -3,18 +3,9 @@ import { Service, PlatformAccessory, CharacteristicValue } from 'homebridge';
 import { BticinoSCSHomebridge } from './platform';
 import mqtt from 'mqtt';
 
-/**
- * Platform Accessory
- * An instance of this class is created for each accessory your platform registers
- * Each accessory may expose multiple services of different service types.
- */
 export class BticinoLight {
   private service: Service;
 
-  /**
-   * These are just used to create a working example
-   * You should implement your own code to track the state of your accessory
-   */
   private StateOn = false;
   private mqtt_topic = '';
   private client = mqtt.connect();
