@@ -29,7 +29,6 @@ export class BticinoLight {
     this.client.on('connect', () => {
       this.client.subscribe(this.mqtt_topic + 'status');
       this.client.on('message', (topic, message) => {
-        // message is Buffer
         if (message.toString() === 'off') {
           this.StateOn = false;
         } else if (message.toString() === 'on') {

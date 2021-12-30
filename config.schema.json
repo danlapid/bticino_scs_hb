@@ -7,7 +7,7 @@
     "properties": {
       "devices": {
         "title": "Switches to connect",
-        "description": "The details of the home's switches, if A is 0 and PL is 1 write 01",
+        "description": "The names of your home's switches as configured in the webapp",
         "type": "array",
         "items": {
           "type": "string"

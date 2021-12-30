@@ -30,13 +30,13 @@
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
     "homebridge": "^1.3.5",
-    "mqtt": "^4.2.8",
     "nodemon": "^2.0.13",
     "rimraf": "^3.0.2",
     "ts-node": "^10.3.0",
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "tsc": "^2.0.3"
+    "tsc": "^2.0.3",
+    "mqtt": "^4.2.8"
   }
 }
