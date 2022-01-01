@@ -20,18 +20,19 @@ export class BticinoLight {
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Bticino')
       .setCharacteristic(this.platform.Characteristic.Model, 'Model')
       .setCharacteristic(this.platform.Characteristic.SerialNumber, 'Serial');
-    this.service = this.accessory.getService(this.platform.Service.Lightbulb) || this.accessory.addService(this.platform.Service.Lightbulb);
+    this.service = this.accessory.getService(this.platform.Service.Switch) || this.accessory.addService(this.platform.Service.Switch);
     this.service.setCharacteristic(this.platform.Characteristic.Name, this.accessory.context.deviceName);
     this.service.getCharacteristic(this.platform.Characteristic.On)
-      .onSet(this.setOn.bind(this))                // SET - bind to the `setOn` method below
-      .onGet(this.getOn.bind(this));               // GET - bind to the `getOn` method below
+      .onSet(this.setOn.bind(this))
+      .onGet(this.getOn.bind(this));
 
     this.client.on('connect', () => {
       this.client.subscribe(this.mqtt_topic + 'status');
+      this.client.publish(this.mqtt_topic + 'get', 'get');
       this.client.on('message', (topic, message) => {
-        if (message.toString() === 'off') {
+        if (message.toString() === 'Off') {
           this.StateOn = false;
-        } else if (message.toString() === 'on') {
+        } else if (message.toString() === 'On') {
           this.StateOn = true;
         }
       });
@@ -39,11 +40,11 @@ export class BticinoLight {
   }
 
   async setOn(value: CharacteristicValue) {
-    let message = '0';
+    let message = 'Off';
     if (value) {
-      message = '1';
+      message = 'On';
     }
-    this.client.publish(this.mqtt_topic + 'switch',
+    this.client.publish(this.mqtt_topic + 'set',
       message, { qos: 0, retain: false }, (error) => {
         if (error) {
           this.platform.log.error(error.message);
